@@ -1,7 +1,7 @@
 ---
 - hosts: app
   roles:
-    - ten7.flightdeck_base
+    - flightdeck_base
   tasks:
     - name: Create a temp directory to store files needed by the run
       tempfile:
