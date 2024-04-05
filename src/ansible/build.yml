@@ -1,0 +1,41 @@
+---
+- hosts: app
+  roles:
+    - ten7.flightdeck_base
+  tasks:
+    - name: Create a temp directory to store files needed by the run
+      tempfile:
+        state: directory
+        prefix: "ansible-deploy-"
+      register: _run_temp_dir
+      notify:
+        - clear caches
+    - name: Install necessary software.
+      community.general.apk:
+        name: "{{ _packages | join(',') }}"
+        state: present
+        update_cache: yes
+      notify:
+        - clear apk cache
+      vars:
+        _packages:
+          - "kubectl"
+          - "openssh-client"
+          - "py3-boto3"
+          - "py3-botocore"
+          - "py3-chardet"
+          - "py3-jmespath"
+          - "py3-pip"
+          - "py3-urllib3"
+          - "s3cmd"
+        
+  handlers:
+    - name: clear caches
+      shell: >
+        rm -rf {{ item }}
+      loop:
+        - "/tmp/*"
+        - "/var/cache/apk/*"
+        - "/root/.ansible/tmp"
+        - "/root/.cache"
+

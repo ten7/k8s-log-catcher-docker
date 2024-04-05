@@ -1,0 +1,19 @@
+---
+flighdeck_motd_name: "k8s-log-catcher"
+
+flightdeck_groups:
+  - name: "app"
+
+flightdeck_users:
+  - name: "app"
+    group: "app"
+    home: "/home/app"
+
+flightdeck_root_prompt: '\u@k8s-log-catcher:\w# '
+flightdeck_user_prompt: '\u@k8s-log-catcher:\w$ '
+
+flightdeck_motd_links:
+  - name: 'Code & docs'
+    url: 'https://github.com/ten7/k8s-log-catcher'
+
+

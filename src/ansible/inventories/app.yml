@@ -1,0 +1,9 @@
+---
+app:
+  hosts:
+    app.localhost:
+      ansible_host: localhost
+  vars:
+    ansible_connection: local
+    ansible_python_interpreter: /usr/bin/python3
+
